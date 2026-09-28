@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f4f5f7" />
+  <meta name="description" content="一叠事：把需求、计划、推进、协作与周报叠成清楚的下一步。" />
+  <title>一叠事</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%233253dc'/%3E%3Crect x='15' y='17' width='29' height='34' rx='8' fill='%23d9f568' transform='rotate(-6 29 34)'/%3E%3Cpath d='M27 27h10M27 34h14M27 41h8' stroke='%23191b20' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="catalog" aria-label="功能目录">
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true">叠</div>
+        <div><strong>一叠事</strong><span>事事有下一步</span></div>
+      </div>
+      <nav class="module-stack">
+        <button class="module-card lilac" data-view="intake"><span>01</span><strong>需求接单台</strong><i>→</i></button>
+        <button class="module-card lime" data-view="roadmap"><span>02</span><strong>实习项目路线图</strong><i>→</i></button>
+        <button class="module-card cobalt" data-view="schedule"><span>03</span><strong>工作负荷协商台</strong><i>→</i></button>
+        <button class="module-card coral active" data-view="today" aria-current="page"><span>04</span><strong>今日推进台</strong><i>→</i></button>
+        <button class="module-card lilac" data-view="waiting"><span>05</span><strong>等待跟进台</strong><i>→</i></button>
+        <button class="module-card lime" data-view="weekly"><span>06</span><strong>周报证据台</strong><i>→</i></button>
+      </nav>
+      <button class="settings-button" type="button"><span>设置与数据</span><span>⌘ ,</span></button>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <button class="mobile-menu" type="button" aria-label="打开功能目录">☰</button>
+        <label class="global-search"><span>⌕</span><input type="search" placeholder="搜索任务、项目或进展" aria-label="全局搜索" /></label>
+        <button class="ghost-button" id="reduce-motion" type="button">减少动态</button>
+        <button class="primary-button" id="new-task" type="button"><span>＋</span> 新建任务</button>
+      </header>
+
+      <section class="view view-today" data-view-panel="today">
+        <div class="page-heading">
+          <div><div class="eyebrow">MON · 09.28</div><h1>今天，三件事</h1><p>4.5 小时 · 2 项待跟进 · 已保存</p></div>
+          <div class="date-badge"><strong>28</strong><span>九月</span></div>
+        </div>
+
+        <div class="today-grid">
+          <div class="focus-zone">
+            <div class="section-label"><span>今日重点 · 3 / 3</span><span class="hint">拖动卡片或点击名称切换</span></div>
+            <div class="deck" id="focus-deck" aria-live="polite"></div>
+            <div class="deck-controls">
+              <button class="round-arrow" id="prev-card" type="button" aria-label="上一项">←</button>
+              <div class="deck-dots" id="deck-dots" aria-label="任务位置"></div>
+              <button class="round-arrow dark" id="next-card" type="button" aria-label="下一项">→</button>
+            </div>
+          </div>
+
+          <aside class="today-list-panel">
+            <div class="section-label"><span>直接选择任务</span><span>今日</span></div>
+            <div class="task-name-list" id="task-name-list"></div>
+            <div class="followup-strip">
+              <div><span class="status-pill outline">待跟进</span><strong>权益文案确认</strong><small>今天 16:00 · 等待产品导师</small></div>
+              <button type="button" aria-label="打开等待跟进台">→</button>
+            </div>
+            <div class="progress-note"><span>今日进展</span><p>完成页面结构梳理，记录 3 个首屏信息层级问题。</p><small>14:20 · 来自「开卡页优化」</small></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" data-view-panel="intake" hidden>
+        <div class="page-heading compact-heading"><div><div class="eyebrow">01 · INTAKE</div><h1>把需求接清楚</h1><p>保留原话，建议与事实分开。</p></div><button class="round-plus" type="button" data-open-new>＋</button></div>
+        <div class="intake-layout">
+          <aside class="rail-card">
+            <div class="section-label"><span>需求列表</span><button class="text-button" type="button">最近更新</button></div>
+            <div class="filter-pills"><button class="active">全部 3</button><button>待确认 1</button><button>已确认 2</button></div>
+            <button class="request-item active" type="button"><span class="status-dot coral-dot"></span><span><strong>梳理开卡页优化方向</strong><small>今天 10:24 · 待确认</small></span></button>
+            <button class="request-item" type="button"><span class="status-dot lime-dot"></span><span><strong>整理竞品会员权益</strong><small>昨天 16:40 · 已确认</small></span></button>
+            <button class="request-item" type="button"><span class="status-dot blue-dot"></span><span><strong>核对活动数据口径</strong><small>周一 09:12 · 已确认</small></span></button>
+          </aside>
+          <section class="editor-card">
+            <div class="editor-head"><div><span class="tiny-label">原始需求 · 自动保存草稿</span><h2>你看一下开卡页还有什么优化空间，下周讨论。</h2></div><span class="status-pill">待确认</span></div>
+            <label class="field full"><span>保留的原话</span><textarea id="raw-demand" rows="4">你看一下开卡页还有什么优化空间，下周讨论。</textarea><small>录入于 2026-09-28 10:24 · Asia/Shanghai</small></label>
+            <div class="field-grid">
+              <label class="field"><span>任务标题</span><input id="intake-title" value="梳理开卡页优化方向" maxlength="80" /></label>
+              <label class="field"><span>需求来源人</span><input value="产品导师" /></label>
+              <label class="field"><span>目标 <em>待补充</em></span><input placeholder="例如：明确首屏信息优先级" /></label>
+              <label class="field"><span>交付物 <em>待补充</em></span><input placeholder="问题清单、草图或 PRD" /></label>
+            </div>
+            <div class="question-list"><div class="section-label"><span>待确认问题 · 3</span><button class="text-button" type="button">＋ 添加</button></div><label><input type="checkbox" /> 重点希望优化哪个目标？</label><label><input type="checkbox" /> 需要问题清单、原型还是 PRD？</label><label><input type="checkbox" /> 下周具体哪天讨论？</label></div>
+            <div class="button-row"><button class="ghost-button ai-organize" type="button">✦ AI 整理建议</button><button class="primary-button confirm-intake" type="button">确认任务</button></div>
+          </section>
+          <aside class="ai-panel">
+            <span class="status-pill outline">AI 建议 · 未采用</span><h3>先整理页面结构</h3><p>建议第一步：记录首屏已有模块、信息层级与主要操作入口。</p><div class="evidence"><span>原文依据</span><q>看一下开卡页还有什么优化空间</q></div><button class="outline-button adopt-suggestion" type="button">采用为下一步</button><p class="privacy-note">内容仅在点击生成时发送；没有配置模型时可继续手动填写。</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" data-view-panel="roadmap" hidden>
+        <div class="page-heading compact-heading"><div><div class="eyebrow">02 · ROADMAP</div><h1>看清下一步</h1><p>开卡页优化 · 当前在「方案设计」</p></div><button class="primary-button" type="button">＋ 新建项目</button></div>
+        <div class="project-switch"><button class="active">开卡页优化</button><button>会员权益梳理</button><button>未归属项目</button></div>
+        <div class="stage-track">
+          <article class="stage-card stage-done"><span>01</span><div><small>已完成</small><h3>需求明确</h3><p>确认优化范围与讨论时间</p></div><strong>2 / 2</strong></article>
+          <article class="stage-card stage-current"><span>02</span><div><small>当前阶段</small><h3>方案设计</h3><p>输出问题清单与优化草图</p></div><strong>1 / 3</strong></article>
+          <article class="stage-card"><span>03</span><div><small>计划 10.02</small><h3>评审</h3><p>与导师确认方案取舍</p></div><strong>尚未添加任务</strong></article>
+          <article class="stage-card"><span>04</span><div><small>未开始</small><h3>开发与测试</h3><p>跟进实现与验收</p></div><strong>0 / 2</strong></article>
+          <article class="stage-card"><span>05</span><div><small>未开始</small><h3>上线复盘</h3><p>记录结果与后续动作</p></div><strong>0 / 1</strong></article>
+        </div>
+        <div class="roadmap-detail">
+          <div class="detail-title"><div><span class="status-pill">进行中</span><h2>整理开卡页首屏优化方案</h2><p>下一步与今日推进台保持同步</p></div><button class="outline-button" type="button" data-open-drawer>编辑详情</button></div>
+          <div class="step-list"><label class="step done"><input type="checkbox" checked /><span><strong>梳理当前页面结构</strong><small>已完成 · 今天 14:20</small></span></label><label class="step"><input type="checkbox" /><span><strong>整理首屏信息层级问题</strong><small>当前下一步</small></span><span class="status-pill outline">下一步</span></label><label class="step"><input type="checkbox" /><span><strong>绘制优化方案草图</strong><small>未开始</small></span></label></div>
+          <div class="button-row"><button class="ghost-button" type="button">✦ AI 拆解预览</button><button class="primary-button add-step" type="button">＋ 添加步骤</button></div>
+        </div>
+      </section>
+
+      <section class="view" data-view-panel="schedule" hidden>
+        <div class="page-heading compact-heading"><div><div class="eyebrow">03 · CAPACITY</div><h1>本周缺 3.5 小时</h1><p>看见冲突，再决定怎么调。</p></div><div class="week-switch"><button>←</button><strong>09.28 — 10.04</strong><button>→</button></div></div>
+        <div class="schedule-layout">
+          <aside class="unscheduled-panel"><div class="section-label"><span>待排任务 · 2</span><button class="text-button">估算</button></div><article class="mini-task"><span class="status-pill outline">高优先级</span><h3>补齐竞品分析结论与截图</h3><p>剩余 3.0h · 截止明天 16:00</p><button class="outline-button schedule-action">安排时间</button></article><article class="mini-task"><span class="status-pill outline">总量未估算</span><h3>整理测试反馈</h3><p>截止周五 · 可先安排</p><button class="outline-button schedule-action">安排时间</button></article></aside>
+          <div class="calendar-strip">
+            <article class="day-card past"><header><span>周一</span><strong>28</strong></header><div class="capacity-line"><span>容量 6h</span><strong>已排 4h</strong></div><div class="schedule-block lilac-block" draggable="true"><strong>开卡页优化</strong><span>2.5h</span></div><div class="schedule-block blue-block" draggable="true"><strong>活动复盘</strong><span>1.5h</span></div></article>
+            <article class="day-card today-day"><header><span>周二 · 今天</span><strong>29</strong></header><div class="capacity-line"><span>容量 4h</span><strong>已排 5.5h</strong></div><div class="overload-tag">超载 1.5h</div><div class="schedule-block coral-block" draggable="true"><strong>会员权益分析</strong><span>3h</span></div><div class="schedule-block lilac-block" draggable="true"><strong>开卡页优化</strong><span>2.5h</span></div></article>
+            <article class="day-card"><header><span>周三</span><strong>30</strong></header><div class="capacity-line"><span>容量未设置</span><strong>已排 2h</strong></div><div class="schedule-block blue-block" draggable="true"><strong>数据口径核对</strong><span>2h · 可能受阻</span></div><button class="day-add">＋ 安排</button></article>
+            <article class="day-card"><header><span>周四</span><strong>01</strong></header><div class="capacity-line"><span>容量 5h</span><strong>已排 1h</strong></div><div class="schedule-block lime-block" draggable="true"><strong>周报素材整理</strong><span>1h</span></div><button class="day-add">＋ 安排</button></article>
+            <article class="day-card"><header><span>周五</span><strong>02</strong></header><div class="capacity-line"><span>容量 4h</span><strong>已排 4h</strong></div><div class="schedule-block coral-block" draggable="true"><strong>方案评审</strong><span>4h</span></div></article>
+          </div>
+          <aside class="conflict-panel"><span class="status-pill">固定规则计算</span><h2>2 项需要协商</h2><div class="conflict-item"><strong>周二超载 1.5 小时</strong><p>会员权益分析、开卡页优化</p></div><div class="conflict-item"><strong>竞品分析尚有 3 小时未安排</strong><p>距离截止不足 24 小时</p></div><label class="field"><span>希望的调整</span><select><option>将竞品分析延后到周四</option><option>先完成开卡页方案</option></select></label><button class="primary-button generate-negotiation" type="button">✦ 生成协商草稿</button></aside>
+        </div>
+      </section>
+
+      <section class="view" data-view-panel="waiting" hidden>
+        <div class="page-heading compact-heading"><div><div class="eyebrow">05 · WAITING</div><h1>等回复，也有下一步</h1><p>今天跟进 2 项 · 1 项未安排</p></div><button class="primary-button add-waiting" type="button">＋ 新增等待</button></div>
+        <div class="filter-pills large"><button class="active">全部开放 4</button><button>今天需跟进 2</button><button>已逾期 1</button><button>已解决 7</button></div>
+        <div class="waiting-columns">
+          <div class="waiting-list">
+            <article class="waiting-card coral-wait"><div class="waiting-index">01</div><div class="waiting-main"><div class="card-top"><span class="status-pill">阻塞执行</span><span>今天 16:00</span></div><h2>确认权益文案是否可以进入评审</h2><p>等待对象：产品导师 · 影响周四方案评审</p><footer><span>所属任务 · 整理开卡页首屏优化方案</span><button class="round-arrow dark open-talk" type="button">→</button></footer></div></article>
+            <article class="waiting-card lilac-wait"><div class="waiting-index">02</div><div class="waiting-main"><div class="card-top"><span class="status-pill">非阻塞</span><span>已逾期 1 天</span></div><h2>补充新客数据口径说明</h2><p>等待对象：数据同学 · 上次沟通周一 11:20</p><footer><span>所属任务 · 九月活动复盘</span><button class="round-arrow dark open-talk" type="button">→</button></footer></div></article>
+            <article class="waiting-card lime-wait"><div class="waiting-index">03</div><div class="waiting-main"><div class="card-top"><span class="status-pill">阻塞执行</span><span>未安排跟进</span></div><h2>确认竞品样本范围</h2><p>等待对象：带教老师 · 不产生日期提醒</p><footer><span>所属任务 · 会员权益梳理</span><button class="round-arrow dark open-talk" type="button">→</button></footer></div></article>
+          </div>
+          <aside class="talk-panel"><span class="status-pill outline">跟进话术 · 草稿</span><h3>轻提醒</h3><textarea rows="9">老师好，想跟进一下开卡页权益文案的确认情况。这个结果会影响周四的方案评审，如果今天方便的话，辛苦帮我确认一下是否可以进入下一步，谢谢。</textarea><div class="button-row"><button class="outline-button copy-talk" type="button">复制话术</button><button class="primary-button mark-followed" type="button">标记已跟进</button></div><p class="privacy-note">复制不会写入沟通记录，也不会发送消息。</p></aside>
+        </div>
+      </section>
+
+      <section class="view" data-view-panel="weekly" hidden>
+        <div class="page-heading compact-heading"><div><div class="eyebrow">06 · WEEKLY EVIDENCE</div><h1>只写事实</h1><p>本周 · 8 条可追溯来源</p></div><div class="week-switch"><button>←</button><strong>本周</strong><button>→</button></div></div>
+        <div class="weekly-layout">
+          <aside class="source-panel"><div class="section-label"><span>事实来源 · 已选 6 / 8</span><button class="text-button">全选</button></div><h3>开卡页优化</h3><label class="source-item"><input type="checkbox" checked /><span><strong>完成页面结构梳理</strong><small>人工进展 · 今天 14:20</small></span><button title="查看来源">↗</button></label><label class="source-item"><input type="checkbox" checked /><span><strong>记录 3 个首屏层级问题</strong><small>人工进展 · 今天 14:22</small></span><button title="查看来源">↗</button></label><label class="source-item"><input type="checkbox" checked /><span><strong>提交方案草图链接</strong><small>交付链接 · 周三 16:40</small></span><button title="查看来源">↗</button></label><h3>九月活动复盘</h3><label class="source-item"><input type="checkbox" checked /><span><strong>收到新客口径反馈</strong><small>反馈记录 · 周二 11:10</small></span><button title="查看来源">↗</button></label><label class="source-item"><input type="checkbox" /><span><strong>下周数据复核排期</strong><small>未来计划 · 10.05</small></span><button title="查看来源">↗</button></label></aside>
+          <section class="report-panel"><div class="report-toolbar"><span class="status-pill">草稿 v2</span><div><button class="text-button generate-report">重新生成</button><button class="text-button copy-report">复制</button><button class="text-button export-report">导出 .md</button></div></div><textarea id="report-editor" spellcheck="false"># 实习周报｜2026.09.28—10.04
+
+## 本周完成
+- 完成开卡页现状结构梳理，整理出 3 个首屏信息层级问题，并提交优化方案草图。
+
+## 本周推进
+- 围绕会员权益页补充竞品分析维度，待确认样本范围后继续整理。
+- 核对九月活动的新客数据口径，已收到数据同学反馈。
+
+## 待协调事项
+- 开卡页权益文案仍在等待产品导师确认，影响周四方案评审。
+
+## 下周计划
+- 根据评审意见修改开卡页方案，并补齐竞品权益对比结论。</textarea><div class="save-state"><span class="status-dot lime-dot"></span> 已保存 · 15:02 <button class="text-button">查看历史版本</button></div></section>
+        </div>
+      </section>
+    </main>
+  </div>
+  <dialog class="modal" id="task-modal">
+    <form method="dialog" id="new-task-form">
+      <header><div><span class="eyebrow">QUICK CREATE</span><h2>新建任务</h2></div><button value="cancel" aria-label="关闭">×</button></header>
+      <label class="field full"><span>任务标题 · 必填</span><input id="new-title" required maxlength="80" placeholder="例如：整理首屏优化方案" /></label>
+      <div class="field-grid"><label class="field"><span>优先级</span><select id="new-priority"><option>中</option><option>高</option><option>低</option></select></label><label class="field"><span>截止日期或时间</span><input id="new-deadline" type="datetime-local" /></label><label class="field"><span>项目</span><select><option>未归属项目</option><option>开卡页优化</option><option>会员权益梳理</option></select></label><label class="field"><span>剩余预计工时</span><input type="number" min="0" step="0.25" placeholder="小时" /></label></div>
+      <label class="field full"><span>下一步行动</span><textarea rows="3" maxlength="300" placeholder="写下一个具体、可执行的动作"></textarea></label>
+      <div class="modal-note">普通保存创建为「待确认」；保存并开始相当于确认需求并进入「进行中」。</div>
+      <footer><button class="ghost-button" value="cancel">取消</button><button class="outline-button" type="submit" data-create-mode="draft">保存任务</button><button class="primary-button" type="submit" data-create-mode="start">保存并开始</button></footer>
+    </form>
+  </dialog>
+  <dialog class="modal settings-modal" id="settings-modal">
+    <form method="dialog" id="settings-form">
+      <header><div><span class="eyebrow">SETTINGS & DATA</span><h2>设置与数据</h2></div><button value="cancel" aria-label="关闭">×</button></header>
+      <div class="field-grid"><label class="field"><span>时区</span><select id="timezone-setting"><option>Asia/Shanghai</option><option>Asia/Hong_Kong</option><option>Asia/Tokyo</option><option>Europe/London</option></select></label><label class="field"><span>每日可用工时</span><input id="capacity-setting" type="number" min="0" max="24" step="0.25" placeholder="容量未设置" /></label></div>
+      <label class="switch-row"><input id="motion-setting" type="checkbox" /><span><strong>减少动态效果</strong><small>关闭卡片位移、旋转与回弹动画</small></span></label>
+      <section class="data-box"><div><strong>本地数据</strong><p>数据保存在当前浏览器。清除站点数据会导致丢失，请定期导出 JSON 备份。</p></div><div class="button-row"><button class="outline-button export-json" type="button">导出 JSON</button><label class="outline-button file-button">导入并替换<input id="import-json" type="file" accept="application/json" /></label></div></section>
+      <section class="data-box sample-box"><div><strong>示例数据</strong><p>示例带独立标记，移除时不会删除之后创建的用户任务。</p></div><button class="outline-button remove-samples" type="button">移除示例</button></section>
+      <footer><button class="primary-button save-settings" type="submit">保存设置</button></footer>
+    </form>
+  </dialog>
+  <aside class="detail-drawer" id="detail-drawer" aria-hidden="true">
+    <header><div><span class="eyebrow">TASK DETAIL</span><h2>整理开卡页首屏优化方案</h2></div><button class="drawer-close" type="button" aria-label="关闭详情">×</button></header>
+    <div class="drawer-body"><div class="status-row"><span class="status-pill">进行中</span><span class="status-pill outline">高优先级</span><span class="status-pill outline">示例数据</span></div><label class="field full"><span>下一步行动</span><textarea rows="4">把已记录的 3 个信息层级问题整理成方案草图。</textarea></label><div class="field-grid"><label class="field"><span>截止</span><input type="datetime-local" value="2026-10-02T18:00" /></label><label class="field"><span>剩余预计工时</span><input type="number" min="0" step="0.25" value="2.5" /></label></div><label class="field full"><span>完成说明</span><textarea rows="4" placeholder="完成任务时建议填写；也可写“无补充”"></textarea></label><div class="drawer-actions"><button class="outline-button record-progress" type="button">记录进展</button><button class="primary-button save-details" type="button">保存详情</button></div></div>
+  </aside>
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>

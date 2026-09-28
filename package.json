@@ -1,0 +1,17 @@
+{
+  "name": "yidieshi",
+  "version": "1.0.0",
+  "private": false,
+  "description": "一叠事：面向实习生任务协作的彩色卡片工作台。",
+  "scripts": {
+    "start": "npx serve dist"
+  },
+  "keywords": [
+    "intern",
+    "task",
+    "dashboard",
+    "static-site"
+  ],
+  "author": "yue209",
+  "license": "MIT"
+}
